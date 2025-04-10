@@ -1,4 +1,4 @@
-from flask import Blueprint, request, jsonify
+from flask import Blueprint, request, jsonify, render_template
 from app.controllers.note_controller import NoteController
 from app.models.note import Note
 
@@ -62,3 +62,9 @@ def delete_note(note_id):
         return jsonify({"message": "Nota eliminada", "note": deleted_note.to_dict()}), 200
     except Exception as e:
         return jsonify({"error": "Nota no encontrada"}), 404
+
+
+# Nueva ruta para servir el template
+@notes_bp.route('/template')
+def show_template():
+    return render_template('index.html')  # Buscará en app/templates/
